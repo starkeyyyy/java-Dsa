@@ -1,24 +1,46 @@
 import java.util.*;
 import java.util.stream.*;
+import java.util.HashMap;
 
-class Wealth {
-    Wealth(int [][] arr){
-        int maxWealth = 0;
-        for (int customer[] : arr) {
-            int sum = Arrays.stream(customer).sum();
-             maxWealth = (sum > maxWealth) ? sum : maxWealth; 
+class RomanToInteger {
+    RomanToInteger(String roman){
+        roman = roman.toUpperCase();
+        
+          Map <Character, Integer> romanMap = new HashMap<>();
+        
+        romanMap.put('I', 1);
+        romanMap.put('V', 5);
+        romanMap.put('X', 10);
+        romanMap.put('L', 50);
+        romanMap.put('C', 100);
+        romanMap.put('D', 500);
+        romanMap.put('M', 1000);
+
+        char [] romanArray = roman.toCharArray();
+        int integer = romanMap.get(romanArray[romanArray.length-1]);
+        //int integer = 0;
+        
+        for(int i = 0 ; i<romanArray.length-1 ; i++){
+            if(romanMap.get(romanArray[i]) >= romanMap.get(romanArray[i+1])){
+                integer += romanMap.get(romanArray[i]);
+               
+            }
+            else{
+                integer += -romanMap.get(romanArray[i]);
+                
+            }
+          
         }
-        System.out.println("the max wealth is" + maxWealth);
-            
+              System.out.println(integer);
 
     }
 }
+//
 
 public class main {
     public static void main(String[] args) {
-        int[][] ogArray = {{1, 200, 3}, {2, 9 ,6} , {2 , 7 , 9}};
 
-        Wealth person = new Wealth(ogArray);
+        RomanToInteger number = new RomanToInteger("xC");
     
         
     }
