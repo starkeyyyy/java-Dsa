@@ -1,44 +1,32 @@
 import java.util.*;
 
+
 class Solution {
-     public int myAtoi(String s) {
-    int num = 0;
-    int i = 0;
-    s = s.trim();
+    public int lengthOfLongestSubstring(String s) {
+        HashSet<Character> chars = new HashSet<>();
+        int maxLength = 0;
+        int start = 0;
 
-    if (s.length() == 0) return 0;
-
-    int sign = 1;
-    StringBuilder sb = new StringBuilder(s);
-
-    if (sb.charAt(0) == '-') {
-        sign = -1;
-        i = 1;
-    } else if (sb.charAt(0) == '+') {
-        i = 1;
-    }
-
-    for (int j = i; j < sb.length(); j++) {
-        if (sb.charAt(j) >= '0' && sb.charAt(j) <= '9') {
-            int digit = sb.charAt(j) - '0';
-            if (num > (Integer.MAX_VALUE - digit) / 10) {
-                return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+        for (int end = 0; end < s.length(); end++) {
+            char current = s.charAt(end);
+            
+            while (chars.contains(current)) {
+                chars.remove(s.charAt(start));
+                start++;
             }
-            num = num * 10 + digit;
-        } else {
-            break;
+            
+            chars.add(current);
+            maxLength = Math.max(maxLength, end - start + 1);
         }
+
+        return maxLength;
     }
-
-    return num * sign;
-}
-
 }
 
 public class main {
     public static void main(String[] args) {
         Solution S = new Solution();
-        System.out.println(S.myAtoi("-990sdfgs909kja;lfjoafo"));
+        System.out.println(S.lengthOfLongestSubstring("nfpdmpi"));
 
     }
 }
