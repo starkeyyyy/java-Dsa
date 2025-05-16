@@ -1,32 +1,25 @@
 import java.util.*;
 
-
 class Solution {
-    public int lengthOfLongestSubstring(String s) {
-        HashSet<Character> chars = new HashSet<>();
-        int maxLength = 0;
-        int start = 0;
-
-        for (int end = 0; end < s.length(); end++) {
-            char current = s.charAt(end);
-            
-            while (chars.contains(current)) {
-                chars.remove(s.charAt(start));
-                start++;
+    public String intToRoman(int num) {
+        StringBuilder str = new StringBuilder();
+        int []array = {1 ,4 , 5 ,9 ,  10 ,40 ,  50 , 90 ,  100 , 400 , 500 , 900 , 1000};
+        String [] symbols = {"I" , "IV" ,"V" ,  "IX" ,"X",  "XL" ,"L", "XC" ,"C" ,  "CD", "D" , "CM" , "M"};
+        for(int i = array.length-1 ; i >= 0  ; i--){
+            while(num >= array[i]){
+                num = num - array[i];
+                str= str.append(symbols[i]);
             }
-            
-            chars.add(current);
-            maxLength = Math.max(maxLength, end - start + 1);
-        }
-
-        return maxLength;
+        
     }
+    return str.toString();
+}
 }
 
 public class main {
     public static void main(String[] args) {
         Solution S = new Solution();
-        System.out.println(S.lengthOfLongestSubstring("nfpdmpi"));
+        System.out.println(S.intToRoman(99));
 
     }
 }
