@@ -1,1 +1,0 @@
-Math.min(height[start] , height[end]) * (end - start)
